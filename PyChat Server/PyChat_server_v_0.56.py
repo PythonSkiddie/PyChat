@@ -5,21 +5,21 @@ def Main():
 	
 	print("Welcome to PyChat Server version 0.60. Type 'help' for commands or 'setup' when ready to start server.")
 	
-	#######################################################################
-	####################### Defining variables ############################
-	host = input('Enter the host IP address: ')							  #
-	stport = int(input('Enter the starting point for the port range: '))  #
-	enport = int(input('Enter the end point for the port range: '))		  #
-	port = range(stport, enport)										  #
-	clinumber = int(input('Enter the max number of clients allowed: '))	  #
-	#######################################################################
+	host = input('Enter the host IP address: ')							  
+	stport = int(input('Enter the starting point for the port range: '))  
+	enport = int(input('Enter the end point for the port range: '))		  
+	port = range(stport, enport)										  
+	clinumber = int(input('Enter the max number of clients allowed: '))
 	
 	# Defining server IP address, port range, and max connections allowed.
 	
 	s.bind((host, port))
 	s.listen(clinumber)
 	
-	
+	c, addr = s.accept()
+	username = s.recv(1024).decode('utf-8')
+	print('Got connection from {}, {}')
+	# use this code to build new code
 	
 #print ('Welcome to PyChat Server v 0.56. When a client connects, their \nIP address is shown, along with the port number they connected through.')
 #
@@ -37,14 +37,14 @@ def Main():
 #    c, addr = s.accept()
 #    username = c.recv(1024).decode('utf-8')					# Recieve username of connected client
 #    print ('Got connection from: ' + str(addr))				# print the IP address and connected port of client
-#    if True:												# 
-#        print ('Username: ' + username)						# Show connected client's username
-#    while True:												#
+#    if True:									 
+#        print ('Username: ' + username)					# Show connected client's username
+#    while True:								
 #        data = c.recv(1024).decode('utf-8')					# Recieve data from client(s)
 #        if not data:
 #            break
 #        print (username + ': '  + data)
-#        data = '+'											# Sending confirmation to the client that a message was recieved
+#        data = '+'								# Sending confirmation to the client that a message was recieved
 #        c.send(data.encode('utf-8'))
 #    c.close()
 #
