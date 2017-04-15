@@ -1,15 +1,20 @@
 import socket
 
+print("Welcome to PyChat Server version 0.60. Type 'help' for commands or 'setup' when ready to start server.\n")
+choice = input(">>>")
+
+if choice == "help" | "help".upper():
+	help()
+	
 def Main():
 	s = socket.socket()
 	
-	print("Welcome to PyChat Server version 0.60. Type 'help' for commands or 'setup' when ready to start server.")
-	
-	host = input('Enter the host IP address: ')							  
-	stport = int(input('Enter the starting point for the port range: '))  
-	enport = int(input('Enter the end point for the port range: '))		  
+		
+	host = input("Enter the host IP address: ")							  
+	stport = int(input("Enter the starting point for the port range: "))  
+	enport = int(input("Enter the end point for the port range: "))		  
 	port = range(stport, enport)										  
-	clinumber = int(input('Enter the max number of clients allowed: '))
+	clinumber = int(input("Enter the max number of clients allowed: "))
 	
 	# Defining server IP address, port range, and max connections allowed.
 	
@@ -17,8 +22,17 @@ def Main():
 	s.listen(clinumber)
 	
 	c, addr = s.accept()
-	username = s.recv(1024).decode('utf-8')
-	print('Got connection from {}, {}')
+	username = s.recv(1024).decode("utf-8")
+	print('Got connection from {}, {}'.format(host, port))
+	
+def help():
+	print("Commands:\n")
+	print("kick [username] [ip address]\tKick a user")
+	print("ban [\"username\"] [\"ip address\"] [time in hours]\tBan a user")
+	print("announce [\"message\"]\tAnnounce a message with the username \"ADMIN\"")
+	print("ip [\"username\"]\tshow username")
+
+	
 	# use this code to build new code
 	
 #print ('Welcome to PyChat Server v 0.56. When a client connects, their \nIP address is shown, along with the port number they connected through.')
