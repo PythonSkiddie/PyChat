@@ -1,36 +1,38 @@
 import socket
 
-print("Welcome to PyChat Server version 0.60. Type 'help' for commands or 'setup' when ready to start server.\n")
-choice = input(">>>")
-
-if choice == "help" | "help".upper():
-	help()
+print("Welcome to PyChat Server version 0.60. Type 'help' for commands or 'setup' when ready to start server.")
 	
+admin = input(">>> ")
+
 def Main():
 	s = socket.socket()
-	
-		
-	host = input("Enter the host IP address: ")							  
-	stport = int(input("Enter the starting point for the port range: "))  
-	enport = int(input("Enter the end point for the port range: "))		  
-	port = range(stport, enport)										  
-	clinumber = int(input("Enter the max number of clients allowed: "))
-	
+
+# this code looks weird becuase i pasted it from a python editor     
+	if admin == "help" | "help".upper():
+	  print("Commands:")
+	  print("kick [\"username\"] [IP]\t\tKicks a user")
+	  print("ban [\"username\"] [\"IP\"] [hours] \t\tBans a user for a minimum of one hour")
+	  print("announce [\"message\"] [\"username\"] (optional)\t\tAnnounces a message with the default username of ADMIN")
+	  print("ip [username]\t\tShows the IP of a user")
+	  print("*command here*")
+    
+	elif admin == "setup" | "setup".upper():
+	  host = input('Enter the host IP address: ')							  	  
+	  port = int(input("Enter the port for your server: "))										  
+      clientsAllowed = int(input('Enter the max number of clients allowed: '))	
+	  clientIPs = range(1, clientsAllowed + 1)
+        
+	else:
+	  print("Unrecognized command. Try again.")
+	  Main()
+    
 	# Defining server IP address, port range, and max connections allowed.
 	
 	s.bind((host, port))
 	s.listen(clinumber)
 	
-	c, addr = s.accept()
-	username = s.recv(1024).decode("utf-8")
-	print('Got connection from {}, {}'.format(host, port))
-	
-def help():
-	print("Commands:\n")
-	print("kick [username] [ip address]\tKick a user")
-	print("ban [\"username\"] [\"ip address\"] [time in hours]\tBan a user")
-	print("announce [\"message\"]\tAnnounce a message with the username \"ADMIN\"")
-	print("ip [\"username\"]\tshow username")
+    username = s.recv(1024).decode('utf-8')
+    print("Got connection from {}, port {}\nUsername: {}".format(clientIP1, port, username))
 
 	
 	# use this code to build new code
